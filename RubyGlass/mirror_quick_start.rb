@@ -284,6 +284,10 @@ class MirrorQuickStart < Sinatra::Base
     when 'timeline'
       params[:userActions].each do |user_action|
         if user_action[:type] == 'SHARE'
+          #This part I get the last location
+          location_id = 'latest'
+          location = @mirror.get_location(location_id)
+          
           timeline_item_id = params[:itemId]
 
           timeline_item = @mirror.get_timeline_item(timeline_item_id)
@@ -295,7 +299,7 @@ class MirrorQuickStart < Sinatra::Base
           # the original caption), but I wanted to illustrate the patch method
           # here.
           @mirror.patch_timeline_item(timeline_item_id,
-            { text: "Ruby Quick Start got your photo! #{caption}" })
+            { text: "Caption #{caption} and Location - lat #{location.latitude} and loc #{location.longitude}." })
         end
       end
     when 'locations'
