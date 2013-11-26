@@ -44,13 +44,13 @@ class MirrorQuickStart < Sinatra::Base
     # to timeline notifications.
     def bootstrap_new_user(mirror)
       mirror.insert_timeline_item({
-        text: 'Welcome to the Mirror API Ruby Quick Start'
+        text: 'Bienvenido a Memr'
       })
 
       mirror.insert_contact({
         id: 'ruby-quick-start',
-        displayName: 'Ruby Quick Start',
-        imageUrls: ["#{base_url}/images/chipotle-tube-640x360.jpg"]
+        displayName: 'Memr',
+        imageUrls: ["http://hackadabra.com/x/share_view_01.png"]
       })
 
       # Guard this statement in case the application is not running as HTTPS.
