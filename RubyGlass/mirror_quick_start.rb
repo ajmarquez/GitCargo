@@ -50,12 +50,13 @@ class MirrorQuickStart < Sinatra::Base
       mirror.insert_contact({
         id: 'ruby-quick-start',
         displayName: 'Memr',
-        imageUrls: ["http://hackadabra.com/x/share_view_01.png"]
+        imageUrls: ["http://hackadabra.com/x/share_view_01.png"],
+        sharingFeatures: ["ADD_CAPTION"]
       })
 
       # Guard this statement in case the application is not running as HTTPS.
       begin
-        callback = "#{base_url}/notify-callback"
+        callback = "https://mirrornotifications.appspot.com/forward?url="+"#{base_url}/notify-callback"
         mirror.insert_subscription(session[:user_id], 'timeline', callback)
       rescue
         # Do nothing here.
@@ -285,21 +286,22 @@ class MirrorQuickStart < Sinatra::Base
       params[:userActions].each do |user_action|
         if user_action[:type] == 'SHARE'
           #This part I get the last location
-          location_id = 'latest'
-          location = @mirror.get_location(location_id)
+          #location_id = 'latest'
+          #location = @mirror.get_location(location_id)
           
-          timeline_item_id = params[:itemId]
+          #timeline_item_id = params[:itemId]
 
-          timeline_item = @mirror.get_timeline_item(timeline_item_id)
-          caption = timeline_item.text || ''
+          #timeline_item = @mirror.get_timeline_item(timeline_item_id)
+          #caption = timeline_item.text || ''
 
           # Alternatively, we could have updated the caption of the
           # timeline_item object itself and used the update method (especially
           # since we needed to get the full TimelineItem in order to retrieve
           # the original caption), but I wanted to illustrate the patch method
-          # here.
-          @mirror.patch_timeline_item(timeline_item_id,
-            { text: "Caption #{caption} and Location - lat #{location.latitude} and loc #{location.longitude}." })
+          # here.  ## Caption #{caption} and Location - lat #{location.latitude} and loc #{location.longitude}."
+         @mirror.insert_timeline_item({
+        text: "This is a Test bitch!" })
+        
         end
       end
     when 'locations'
