@@ -244,6 +244,8 @@ class MirrorClient
       parameters: { id: location_id }
     ).data
   end
+  
+  
 
   ##
   # Gets the list of current subscriptions.

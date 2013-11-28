@@ -2,7 +2,7 @@
   %table.table.table-bordered
     %tbody
       %tr
-   
+        
         %td
           - if timeline_item.attachments.length > 0
             - timeline_item.attachments.each do |attachment|
@@ -10,15 +10,15 @@
           - else
             .muted None
       %tr
-      %td= Rack::Utils.escape_html(timeline_item.text)
+        
+        %td= Rack::Utils.escape_html(timeline_item.text)
       %tr
-      %td= Rack::Utils.escape_html(timeline_item.created)
-      
-      
-      %tr
-        %td(colspan="1")
-          %form.form-inline(method="post" action="/delete-item")
-          %input(type="hidden" name="id" value="#{timeline_item.id}")
-          %button.btn.btn-block.btn-danger(type="submit") Delete
-           
        
+        %td= Rack::Utils.escape_html(timeline_item.created)
+       
+      
+      %tr
+        %td(colspan="2")
+          %form.form-inline(method="post" action="/delete-item")
+            %input(type="hidden" name="id" value="#{timeline_item.id}")
+            %button.btn.btn-block.btn-danger(type="submit") Delete

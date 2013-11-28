@@ -40,7 +40,7 @@ class MirrorQuickStart < Sinatra::Base
 
     ##
     # Bootstrap the new user by inserting a welcome item into their
-    # timeline, creating the Memr contact, and subscribing
+    # timeline, creating the Ruby Quick Start contact, and subscribing
     # to timeline notifications.
     def bootstrap_new_user(mirror)
       mirror.insert_timeline_item({
@@ -105,18 +105,46 @@ class MirrorQuickStart < Sinatra::Base
     haml :index
   end
   
-  ##
-  # Called when one of the buttons is clicked that inserts an item into
-  # the timeline.
-  post '/insert-item' do
-    @mirror.insert_timeline_item(
-      { text: params[:message] },
-      "#{settings.public_folder}/#{params[:imageUrl]}",
-      params[:contentType])
+    # Insert Wayra Memr postcards
+  # by making then a bundle
+  
+   def wayracall
+     @mirror.insert_timeline_item(
+      { text: "Science Bitch!",
+        html: "<img src=\"http://hackadabra.com/x/Wayrasingular.jpg\" >
+        <p>Science Bitch</p>
+        
+        "})
+        
+        
+      #"#{settings.public_folder}/#{params[:imageUrl]}",
+      #params[:contentType])
+
+      
+   #"http://hackadabra.com/x/Wayrasingular.jpg"
 
     session[:message] = 'Inserted a timeline item.'
     redirect to '/'
   end
+
+  
+  ##
+  # Called when one of the buttons is clicked that inserts an item into
+  # the timeline.
+  post '/insert-item' do
+  
+  wayracall
+    #@mirror.insert_timeline_item(
+     # { text: params[:message] },
+      #"#{settings.public_folder}/#{params[:imageUrl]}",
+      #params[:contentType])
+
+   # session[:message] = 'Inserted a timeline item.'
+   # redirect to '/'
+  end
+
+
+
 
   ##
   # Called when the button is clicked that inserts a new timeline item
@@ -200,11 +228,11 @@ class MirrorQuickStart < Sinatra::Base
   post '/insert-contact' do
     @mirror.insert_contact({
       id: 'ruby-quick-start',
-      displayName: 'Memr',
+      displayName: 'Ruby Quick Start',
       imageUrls: ["#{base_url}/images/chipotle-tube-640x360.jpg"]
     })
 
-    session[:message] = 'Inserted the Memr contact.'
+    session[:message] = 'Inserted the Ruby Quick Start contact.'
     redirect to '/'
   end
 
@@ -213,7 +241,7 @@ class MirrorQuickStart < Sinatra::Base
   post '/delete-contact' do
     @mirror.delete_contact('ruby-quick-start')
 
-    session[:message] = 'Deleted the Memr contact.'
+    session[:message] = 'Deleted the Ruby Quick Start contact.'
     redirect to '/'
   end
 
@@ -285,18 +313,23 @@ class MirrorQuickStart < Sinatra::Base
     when 'timeline'
       params[:userActions].each do |user_action|
         if user_action[:type] == 'SHARE'
-          timeline_item_id = params[:itemId]
+          #This part I get the last location
+          #location_id = 'latest'
+          #location = @mirror.get_location(location_id)
+          
+          #timeline_item_id = params[:itemId]
 
-          timeline_item = @mirror.get_timeline_item(timeline_item_id)
-          caption = timeline_item.text || ''
+          #timeline_item = @mirror.get_timeline_item(timeline_item_id)
+          #caption = timeline_item.text || ''
 
           # Alternatively, we could have updated the caption of the
           # timeline_item object itself and used the update method (especially
           # since we needed to get the full TimelineItem in order to retrieve
           # the original caption), but I wanted to illustrate the patch method
-          # here.
-          @mirror.patch_timeline_item(timeline_item_id,
-            { text: "Memr got your photo! #{caption}" })
+          # here.  ## Caption #{caption} and Location - lat #{location.latitude} and loc #{location.longitude}."
+         @mirror.insert_timeline_item({
+        text: "This is a Test bitch!" })
+        
         end
       end
     when 'locations'
@@ -305,7 +338,7 @@ class MirrorQuickStart < Sinatra::Base
 
       # Insert a new timeline card with the user's location.
       @mirror.insert_timeline_item({
-        text: "Memr says you are at " +
+        text: "Ruby Quick Start says you are at " +
           "#{location.latitude} by #{location.longitude}." })
     else
       puts "I don't know how to process this notification: " +
