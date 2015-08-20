@@ -1,4 +1,4 @@
 GitCargo
 ========
 
-This is just the Ruby Demo made by the Google folks, plus some variations I may add. This is mostly a test.
+This is the base for a memory-geo-tagging idea developed by me for google glass. Is basicly Google´s demo project plus some minor variations. 
