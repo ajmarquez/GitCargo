@@ -1,6 +1,4 @@
-Google Mirror API's Quick Start for Ruby (using Sinatra)
+GitCargo (AKA Memr)
 ====
 
-The documentation for this quick start is maintained on developers.google.com.
-Please see here for more information:
-https://developers.google.com/glass/quickstart/ruby
+Here lays the code for a alpha version of a Memory geotagging app based on Google's Ruby Tutorial for Google Glass. It's really basic for the time being and the idea is that any person in a given location could post a memory and when this person gets back to the place, this memory will be shown. 
